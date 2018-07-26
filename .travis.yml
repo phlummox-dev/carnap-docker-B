@@ -17,7 +17,7 @@ env:
 - TAG=0.1
 
 before_install:
-- docker build --file Dockerfile-${TAG} -t phlummox/carnap-build-B:${TAG} .
+- docker build --file Dockerfile-${TAG} -t phlummox/carnap-docker-b:${TAG} .
 
 run:
 
@@ -27,7 +27,7 @@ run:
 
 script:
 - docker --version
-- docker run --rm phlummox/carnap-build-B stack --version
+- docker run --rm phlummox/phlummox/carnap-docker-b stack --version
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push phlummox/carnap-build-B:${TAG}
+- docker push phlummox/phlummox/carnap-docker-b:${TAG}
 
