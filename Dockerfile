@@ -19,11 +19,13 @@ RUN apt-get clean && \
     libbz2-dev                  \
     libcairo2-dev               \
     libgmp-dev                  \
+    libgtk-3-dev                \
     libncurses5-dev             \
     libncursesw5-dev            \
     libpango1.0-dev             \
     libreadline6-dev            \
     libreadline-dev             \
+    libwebkitgtk-3.0-dev        \
     libyaml-dev                 \
     locales                     \
     make                        \
@@ -66,9 +68,9 @@ RUN \
   mkdir -p ~/.local/bin && \
   curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack' && \
   stack setup && \
-  stack --resolver=lts-6.2 setup && \
   stack --resolver=lts-6.11 setup && \
-  stack --resolver=lts-6.11 install cabal-install alex happy hscolour hsc2hs
+  stack --resolver=lts-6.2 setup && \
+  stack --resolver=lts-6.2 install cabal-install alex happy hscolour hsc2hs
 
 COPY stack.yaml.ghcjs /tmp
 
@@ -101,6 +103,7 @@ RUN \
   stack build Carnap && \
   stack --stack-yaml=stack.yaml.ghcjs build Carnap-GHCJS && \
   stack install yesod-bin
+
 
 #RUN \
 #  stack build Carnap-Server

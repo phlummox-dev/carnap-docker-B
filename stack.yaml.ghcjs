@@ -6,7 +6,7 @@ packages:
 - Carnap-Server/
 - Carnap-GHCJS/
 - ./semigroupoids-5.0.1 
-resolver: lts-6.11
+resolver: lts-6.2
 
 #Uncomment this and run stack setup to install ghcjs; you can uncomment to
 #build the Carnap-Web with ghcjs, by running `stack build Carnap-Web`. To
