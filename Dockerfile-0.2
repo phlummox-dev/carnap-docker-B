@@ -8,7 +8,7 @@ COPY ${GHCJS_YAML} /tmp
 RUN \
   mkdir /opt/ghcjs && \
   cd /opt/ghcjs && \
-  cp /tmp/stack.yaml.ghcjs . && \
+  cp /tmp/${GHCJS_YAML} . && \
   stack --stack-yaml=${GHCJS_YAML} --allow-different-user setup
 
 #RUN "Carnap clone" : && \
