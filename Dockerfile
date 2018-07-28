@@ -72,37 +72,37 @@ RUN \
   stack --resolver=lts-6.2 setup && \
   stack --resolver=lts-6.2 install cabal-install alex happy hscolour hsc2hs
 
-COPY stack.yaml.ghcjs /tmp
+#COPY stack.yaml.ghcjs /tmp
+#
+#RUN \
+#  mkdir /opt/ghcjs && \
+#  cd /opt/ghcjs && \
+#  cp /tmp/stack.yaml.ghcjs . && \
+#  stack --stack-yaml ./stack.yaml.ghcjs --allow-different-user setup
+#
+#RUN "Carnap clone" : && \
+#  mkdir -p ${CARNAP_HM} && \
+#  cd ${CARNAP_HM} && \
+#  git clone https://github.com/phlummox/Carnap.git .
 
-RUN \
-  mkdir /opt/ghcjs && \
-  cd /opt/ghcjs && \
-  cp /tmp/stack.yaml.ghcjs . && \
-  stack --stack-yaml ./stack.yaml.ghcjs --allow-different-user setup
-
-RUN "Carnap clone" : && \
-  mkdir -p ${CARNAP_HM} && \
-  cd ${CARNAP_HM} && \
-  git clone https://github.com/phlummox/Carnap.git .
-
-WORKDIR ${CARNAP_HM}
-
-COPY a79* stack.yaml.ghcjs ./
-
-RUN \
-  git checkout a794e5a60e125da72ff131485fb74ea90c987a78 && \
-  git apply a794e5a60e125da72ff131485fb74ea90c987a78.patch 
-
-RUN \
-  mkdir /opt/ghcjs && \
-  cd /opt/ghcjs && \
-  cp ${CARNAP_HM}/stack.yaml.ghcjs . && \
-  stack --stack-yaml ./stack.yaml.ghcjs --allow-different-user setup
-
-RUN \
-  stack build Carnap && \
-  stack --stack-yaml=stack.yaml.ghcjs build Carnap-GHCJS && \
-  stack install yesod-bin
+#WORKDIR ${CARNAP_HM}
+#
+#COPY a79* stack.yaml.ghcjs ./
+#
+#RUN \
+#  git checkout a794e5a60e125da72ff131485fb74ea90c987a78 && \
+#  git apply a794e5a60e125da72ff131485fb74ea90c987a78.patch 
+#
+#RUN \
+#  mkdir /opt/ghcjs && \
+#  cd /opt/ghcjs && \
+#  cp ${CARNAP_HM}/stack.yaml.ghcjs . && \
+#  stack --stack-yaml ./stack.yaml.ghcjs --allow-different-user setup
+#
+#RUN \
+#  stack build Carnap && \
+#  stack --stack-yaml=stack.yaml.ghcjs build Carnap-GHCJS && \
+#  stack install yesod-bin
 
 
 #RUN \
