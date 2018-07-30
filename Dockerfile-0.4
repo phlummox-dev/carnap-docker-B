@@ -1,0 +1,10 @@
+
+FROM phlummox/carnap-docker-b:0.3
+
+COPY mk_ghcjs_symlinks.sh ./
+
+RUN \
+  ./mk_ghcjs_symlinks.sh && \
+  stack build Carnap-Server
+
+
