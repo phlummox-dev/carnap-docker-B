@@ -12,7 +12,7 @@ cache:
 env:
 - |
   IMAGE=carnap-docker-b
-  TAG=0.2
+  TAG=0.3
 
 
 before_install:

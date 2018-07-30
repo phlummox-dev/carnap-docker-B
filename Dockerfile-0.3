@@ -1,0 +1,32 @@
+
+FROM phlummox/carnap-docker-b:0.2
+
+RUN : "Carnap clone" && \
+  mkdir -p ${CARNAP_HM} && \
+  cd ${CARNAP_HM} && \
+  git clone https://github.com/phlummox/Carnap.git .
+
+WORKDIR ${CARNAP_HM}
+
+COPY patches/a6a0747.patch ./
+
+RUN \
+  git checkout a6a0747 && \
+  git apply a6a0747.patch 
+
+RUN \
+  stack build Carnap 
+
+RUN set -x; \
+  stack build --stack-yaml=${GHCJS_YAML} Carnap && \
+  stack build --stack-yaml=${GHCJS_YAML} Carnap-Client && \
+  stack build --stack-yaml=${GHCJS_YAML} Carnap-GHCJS && \
+  stack install yesod-bin
+
+COPY mk_ghcjs_symlinks.sh ./
+
+RUN \
+  ./mk_ghcjs_symlinks.sh && \
+  stack build Carnap-Server
+
+
